@@ -53,7 +53,14 @@ public class GoldmanLeoSort<T> implements Sorter<T> {
   } // sort(T[])
 
   private void sortHelper(T[] v, int lb, int ub) {
-    if (ub - lb > 0) {
+    int s = ub - lb;
+    if (s == 1) {
+      twoSort(v, lb, ub);
+    } else if (s == 2) {
+      threeSort(v, lb, ub);
+    } else if (s == 3) {
+      fourSort(v, lb, ub);
+    } else if (s > 0) {
 
       // Find a pivot. I chose the middle of three fourths.
       int[] ps = {lb + (ub - lb) / 2, lb + (ub - lb) / 4, lb + ((ub - lb) / 4) * 3};
@@ -64,7 +71,7 @@ public class GoldmanLeoSort<T> implements Sorter<T> {
         pivot = ps[2];
       } else {
         pivot = ps[0];
-      }
+      } // if/if/else
 
       ArrayUtils.swap(v, pivot, lb);
 
@@ -95,5 +102,33 @@ public class GoldmanLeoSort<T> implements Sorter<T> {
       sortHelper(v, lb, sm);
       sortHelper(v, lg, ub);
     }
+  }
+
+  private void twoSort(T[] v, int lb, int ub) {
+    if (order.compare(v[ub], v[lb]) < 0) {
+      ArrayUtils.swap(v, lb, ub);
+    }
+  }
+
+  private void threeSort(T[] v, int lb, int ub) {
+    if (order.compare(v[ub], v[ub - 1]) < 0) {
+      ArrayUtils.swap(v, ub - 1, ub);
+    }
+    if (order.compare(v[ub - 1], v[lb]) < 0) {
+      ArrayUtils.swap(v, ub - 1, lb);
+    }
+    if (order.compare(v[ub], v[ub - 1]) < 0) {
+      ArrayUtils.swap(v, ub - 1, ub);
+    }
+  }
+
+  private void fourSort(T[] v, int one, int four) {
+    int two = one + 1;
+    int three = four - 1;
+    twoSort(v, one, two);
+    twoSort(v, three, four);
+    twoSort(v, one, three);
+    twoSort(v, two, four);
+    twoSort(v, two, three);
   }
 } // class Quicksorter
