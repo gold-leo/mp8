@@ -15,7 +15,7 @@ public class ArrayUtils {
   /**
    * A handy, dandy random-number generator.
    */
-  static Random rand = new Random();
+  public static Random rand = new Random();
 
   // +----------------+----------------------------------------------
   // | Static Methods |

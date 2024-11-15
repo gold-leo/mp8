@@ -108,7 +108,7 @@ public class TestSorter {
    */
   @Test 
   public void permutedIntegersTest() { 
-    int SIZE = 100; 
+    int SIZE = 1000; 
     if (null == intSorter) { 
       return; 
     } // if

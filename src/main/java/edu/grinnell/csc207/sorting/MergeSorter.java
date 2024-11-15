@@ -79,7 +79,7 @@ public class MergeSorter<T> implements Sorter<T> {
     // If len = 0 (size = 1), do nothing (already sorted).
     // If len = 2 (size = 2), sort by comparing and flipping.
     // Otherwise, split the area between the bounds and sort them, then merge.
-    if (len == 0) {
+    if (len <= 0) {
       return;
     } else if (len == 1) {
       if (order.compare(v[start], v[end]) > 0) {

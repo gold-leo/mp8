@@ -5,14 +5,12 @@ import edu.grinnell.csc207.sorting.*;
 
 public class Sandbox {
   public static void main(String[] args) {
-    Comparator<String> order = (x,y) -> x.compareTo(y);
-    InsertionSorter<String> stringSorter = new InsertionSorter<String>(order);
+    Comparator<Integer> order = (x,y) -> x.compareTo(y);
+    Quicksorter<Integer> stringSorter = new Quicksorter<Integer>(order);
 
-    System.out.println(order.compare("d", "b"));
-
-    String[] str = {"d", "b", "c"};
+    Integer[] str = {0, 1, 2, 3, 4};
     stringSorter.sort(str);
-    for (String i : str) {
+    for (Integer i : str) {
       System.err.printf(i + " ");
     }
   }
