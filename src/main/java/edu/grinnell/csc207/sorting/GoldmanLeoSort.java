@@ -55,13 +55,17 @@ public class GoldmanLeoSort<T> implements Sorter<T> {
   private void sortHelper(T[] v, int lb, int ub) {
     if (ub - lb > 0) {
 
-      // Find a pivot. I chose the center.
-      int[] pivot1 = {lb + (ub - lb) / 2, lb + (ub - lb) / 4, lb + ((ub - lb) / 4) * 3};
-      int pivot = 0;
-      for (int i = 0; i < 3; i++) {
-        if pivot1[i] > pivot;
-        
+      // Find a pivot. I chose the middle of three fourths.
+      int[] ps = {lb + (ub - lb) / 2, lb + (ub - lb) / 4, lb + ((ub - lb) / 4) * 3};
+      int pivot;
+      if ((order.compare(v[ps[0]], v[ps[1]]) < 0 && order.compare(v[ps[1]], v[ps[2]]) < 0) || (order.compare(v[ps[2]], v[ps[1]]) < 0 && order.compare(v[ps[1]], v[ps[0]]) < 0)) {
+        pivot = ps[1];
+      } else if ((order.compare(v[ps[0]], v[ps[2]]) < 0 && order.compare(v[ps[2]], v[ps[1]]) < 0) || (order.compare(v[ps[1]], v[ps[2]]) < 0 && order.compare(v[ps[2]], v[ps[0]]) < 0)) {
+        pivot = ps[2];
+      } else {
+        pivot = ps[0];
       }
+
       ArrayUtils.swap(v, pivot, lb);
 
       // Initialize the sorting indexes.
