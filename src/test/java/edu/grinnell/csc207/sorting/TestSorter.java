@@ -120,4 +120,88 @@ public class TestSorter {
     ArrayUtils.permute(original);
     assertSorts(expected, original, intSorter);
   } // permutedIntegers
+
+  /**
+   * Ensure that an array with the same numbers
+   * except 1 are sorted.
+   */
+  @Test 
+  public void sameNumbersTest() { 
+    int SIZE = 1000; 
+    if (null == intSorter) { 
+      return; 
+    } // if
+    Integer[] original = new Integer[SIZE];
+    for (int i = 0; i < SIZE - 1; i++) {
+      original[i] = 1;
+    } // for
+    original[999] = 0;
+    Integer[] expected = original.clone();
+    ArrayUtils.swap(expected, 999, 0);
+    assertSorts(expected, original, intSorter);
+  } // sameNumbersTest()
+
+  /**
+   * Ensure that an array that is empty does not crash.
+   */
+  @Test
+  public void emptyTest() {
+    if (null == stringSorter) {
+      return;
+    } // if
+    String[] original = {};
+    String[] expected = original.clone();
+    assertSorts(expected, original, stringSorter);
+  } // orderedStringTest
+
+  /**
+   * Ensure that an array that is 2 does not crash.
+   */
+  @Test
+  public void twoTest() {
+    if (null == stringSorter) {
+      return;
+    } // if
+    String[] original = {"b", "a"};
+    String[] expected = original.clone();
+    ArrayUtils.swap(expected, 1, 0);
+    assertSorts(expected, original, stringSorter);
+  } // orderedStringTest
+
+  /**
+   * Ensure that an array that is prime does not fail.
+   */
+  @Test
+  public void nullTest() {
+    if (null == stringSorter) {
+      return;
+    } // if
+    String[] original = {"b", "a", "c", "a", "t", "j", "g"};
+    String[] expected = {"a", "a", "b", "c", "g", "j", "t"};
+    assertSorts(expected, original, stringSorter);
+  } // orderedStringTest
+
+    /**
+   * Ensure that an array with the same numbers
+   * except 1 are sorted.
+   */
+  @Test 
+  public void manyNumbersTest() { 
+    int SIZE = 7000; 
+    if (null == intSorter) { 
+      return; 
+    } // if
+    Integer[] original = new Integer[SIZE];
+    for (int i = 0; i < SIZE; i++) {
+      original[i] = i + i;
+    } // for
+    Integer[] expected = original.clone();
+    ArrayUtils.permute(original);
+    assertSorts(expected, original, intSorter);
+  } // sameNumbersTest()
+
+
+
 } // class TestSorter
+
+
