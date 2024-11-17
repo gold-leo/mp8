@@ -1,7 +1,6 @@
 package edu.grinnell.csc207.sorting;
 
 import java.util.Comparator;
-import java.util.Random;
 
 import edu.grinnell.csc207.util.ArrayUtils;
 
@@ -58,7 +57,7 @@ public class Quicksorter<T> implements Sorter<T> {
    */
   @Override
   public void sort(T[] values) {
-    sortHelper(values, 0, values.length - 1);;
+    sortHelper(values, 0, values.length - 1);
   } // sort(T[])
 
   private void sortHelper(T[] v, int lb, int ub) {
@@ -79,8 +78,8 @@ public class Quicksorter<T> implements Sorter<T> {
         } else {
           ArrayUtils.swap(v, sm, lg);
           lg--;
-        }
-      }
+        } // if/else
+      } // for
 
       // Final check
       if (order.compare(v[sm], v[lb]) < 1) {
@@ -90,10 +89,10 @@ public class Quicksorter<T> implements Sorter<T> {
         sm--;
         ArrayUtils.swap(v, lb, sm);
         sm--;
-      }
+      } // if/else
 
       sortHelper(v, lb, sm);
       sortHelper(v, lg, ub);
-    }
-  }
+    } // if
+  } // sortHelper(T[], int, int)
 } // class Quicksorter

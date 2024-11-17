@@ -63,7 +63,7 @@ public class MergeSorter<T> implements Sorter<T> {
 
   /**
    * Recursive function for sort(). Sorts array v within the bounds given.
-   * 
+   *
    * @param v
    *    The array of values.
    * @param start

@@ -60,7 +60,7 @@ public class InsertionSorter<T> implements Sorter<T> {
     for (int i = 1; i < values.length; i++) {
       for (int n = i; n > 0; n--) {
         if (order.compare(values[n - 1], values[n]) > 0) {
-          ArrayUtils.swap(values, n, n-1);
+          ArrayUtils.swap(values, n, n - 1);
         } else {
           break;
         } // if/else

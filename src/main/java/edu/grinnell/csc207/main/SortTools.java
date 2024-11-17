@@ -255,7 +255,7 @@ public class SortTools {
    */
   static Sorter compete(Sorter[] sorters, PrintWriter pen) {
     // Set up the comparator
-    Comparator<Integer> order = (x,y) -> x.compareTo(y);
+    Comparator<Integer> order = (x , y) -> x.compareTo(y);
 
     // Which ones are ok (testing)
     if (pen != null) {
@@ -264,7 +264,7 @@ public class SortTools {
     boolean[] ok = new boolean[sorters.length];
     for (int i = 0; i < sorters.length; i++) {
       ok[i] = test(sorters[i], null);
-      if (! ok[i]) {
+      if (!ok[i]) {
         System.err.println(sorters[i].getClass().getName() + " FAILED!");
       } // if the ith sorter is not ok
     } // for
@@ -312,12 +312,12 @@ public class SortTools {
           break;
         case 2:
           type = "slightly randomized";
-          permute(original, tmpsize/10);
+          permute(original, tmpsize / 10);
           break;
         case 3:
           type = "slightly randomized reverse sorted";
           reverse(original);
-          permute(original, tmpsize/10);
+          permute(original, tmpsize / 10);
           break;
         default:
           type = "randomized";
@@ -382,13 +382,15 @@ public class SortTools {
     System.err.println("Usage: java SortTools COMMAND SortClass1 ... SortClassn");
     System.err.println("  Commands: time, test, compete\n");
   } // help()
-      
+
   /**
    * Get the sorter for a particular class name.  Yay introspection!
+   * @param name
+   * @return sorter
    */
   static Sorter<Comparable> getSorter(String name) {
     Class<?> sclass = null;
-    Comparator<Comparable> order = (x,y) -> x.compareTo(y);
+    Comparator<Comparable> order = (x, y) -> x.compareTo(y);
 
     for (String prefix : prefixes) {
       try {
@@ -405,7 +407,7 @@ public class SortTools {
 
     Constructor<Sorter> construct = null;
     try {
-      construct = 
+      construct =
           (Constructor<Sorter>) sclass.getConstructor(
               Class.forName("java.util.Comparator"));
     } catch (Exception e) {
@@ -425,12 +427,15 @@ public class SortTools {
   /**
    * Create an array of a particular size in which the values are
    * in order.
+   *
+   * @param size
+   * @return Array
    */
   static Integer[] sampleSortedArray(int size) {
     Integer[] result = new Integer[size];
     result[0] = 0;
     for (int i = 1; i < size; i++) {
-      result[i] = result[i-1] + rand.nextInt(3);
+      result[i] = result[i - 1] + rand.nextInt(3);
     } // for
     return result;
   } // sampleSortedArray
@@ -442,6 +447,8 @@ public class SortTools {
    * permute an array.  But I also recall an article by Knuth suggesting
    * that this does randomly arrange things.  In any case, it's good
    * enough for our purposes.
+   *
+   * @param arr
    */
   static void permute(Object[] arr) {
     for (int i = 0; i < arr.length; i++) {
@@ -454,6 +461,9 @@ public class SortTools {
    *
    * Or perhaps this is the one that's less correct, even if
    * n is arr.length.
+   *
+   * @param arr
+   * @param n
    */
   static void permute(Object[] arr, int n) {
     for (int i = 0; i < n; i++) {
@@ -463,6 +473,7 @@ public class SortTools {
 
   /**
    * Reverse an array.
+   * @param arr
    */
   static void reverse(Object[] arr) {
     int lo = 0;
@@ -474,6 +485,9 @@ public class SortTools {
 
   /**
    * Swap two values in an array.
+   * @param arr
+   * @param i
+   * @param j
    */
   static void swap(Object[] arr, int i, int j) {
     Object tmp = arr[i];

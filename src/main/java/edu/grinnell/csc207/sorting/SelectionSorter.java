@@ -62,9 +62,9 @@ public class SelectionSorter<T> implements Sorter<T> {
       for (int n = i; n < values.length; n++) {
         if (order.compare(values[min], values[n]) > 0) {
           min = n;
-        }
-      }
+        } // if
+      } // for
       ArrayUtils.swap(values, i, min);
-    }
+    } // for
   } // sort(T[])
 } // class SelectionSorter

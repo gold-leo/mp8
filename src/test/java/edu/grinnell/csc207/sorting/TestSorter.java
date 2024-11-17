@@ -199,9 +199,6 @@ public class TestSorter {
     ArrayUtils.permute(original);
     assertSorts(expected, original, intSorter);
   } // sameNumbersTest()
-
-
-
 } // class TestSorter
 
 

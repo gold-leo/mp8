@@ -1,10 +1,13 @@
 package edu.grinnell.csc207.sorting;
 
 import java.util.Comparator;
-import java.util.Random;
 
 import edu.grinnell.csc207.util.ArrayUtils;
 
+/**
+ * GoldmanLeoSort, a variation of Quicksort.
+ * @param <T> Array type
+ */
 public class GoldmanLeoSort<T> implements Sorter<T> {
   // +--------+------------------------------------------------------
   // | Fields |
@@ -49,7 +52,7 @@ public class GoldmanLeoSort<T> implements Sorter<T> {
    */
   @Override
   public void sort(T[] values) {
-    sortHelper(values, 0, values.length - 1);;
+    sortHelper(values, 0, values.length - 1);
   } // sort(T[])
 
   private void sortHelper(T[] v, int lb, int ub) {
@@ -65,9 +68,11 @@ public class GoldmanLeoSort<T> implements Sorter<T> {
       // Find a pivot. I chose the middle of three fourths.
       int[] ps = {lb + (ub - lb) / 2, lb + (ub - lb) / 4, lb + ((ub - lb) / 4) * 3};
       int pivot;
-      if ((order.compare(v[ps[0]], v[ps[1]]) < 0 && order.compare(v[ps[1]], v[ps[2]]) < 0) || (order.compare(v[ps[2]], v[ps[1]]) < 0 && order.compare(v[ps[1]], v[ps[0]]) < 0)) {
+      if ((order.compare(v[ps[0]], v[ps[1]]) < 0 && order.compare(v[ps[1]], v[ps[2]]) < 0)
+        || (order.compare(v[ps[2]], v[ps[1]]) < 0 && order.compare(v[ps[1]], v[ps[0]]) < 0)) {
         pivot = ps[1];
-      } else if ((order.compare(v[ps[0]], v[ps[2]]) < 0 && order.compare(v[ps[2]], v[ps[1]]) < 0) || (order.compare(v[ps[1]], v[ps[2]]) < 0 && order.compare(v[ps[2]], v[ps[0]]) < 0)) {
+      } else if ((order.compare(v[ps[0]], v[ps[2]]) < 0 && order.compare(v[ps[2]], v[ps[1]]) < 0)
+             || (order.compare(v[ps[1]], v[ps[2]]) < 0 && order.compare(v[ps[2]], v[ps[0]]) < 0)) {
         pivot = ps[2];
       } else {
         pivot = ps[0];
@@ -86,8 +91,8 @@ public class GoldmanLeoSort<T> implements Sorter<T> {
         } else {
           ArrayUtils.swap(v, sm, lg);
           lg--;
-        }
-      }
+        } // if/else
+      } // for
 
       // Final check
       if (order.compare(v[sm], v[lb]) < 1) {
@@ -97,31 +102,59 @@ public class GoldmanLeoSort<T> implements Sorter<T> {
         sm--;
         ArrayUtils.swap(v, lb, sm);
         sm--;
-      }
+      } // if/else
 
       sortHelper(v, lb, sm);
       sortHelper(v, lg, ub);
-    }
-  }
+    } // if/if/if/if
+  } // sortHelper(T[], int, int)
 
+  /**
+   * Sorts two items in an array.
+   * @param v
+   *    The array.
+   * @param lb
+   *    The first element.
+   * @param ub
+   *    The second element.
+   */
   private void twoSort(T[] v, int lb, int ub) {
     if (order.compare(v[ub], v[lb]) < 0) {
       ArrayUtils.swap(v, lb, ub);
-    }
-  }
+    } // if
+  } // twoSort(T[], int, int)
 
+
+  /**
+   * Sorts three adjacent items in an array.
+    * @param v
+   *    The array.
+   * @param lb
+   *    The lower bound (inclusive).
+   * @param ub
+   *    The upper bound (inclusive).
+   */
   private void threeSort(T[] v, int lb, int ub) {
     if (order.compare(v[ub], v[ub - 1]) < 0) {
       ArrayUtils.swap(v, ub - 1, ub);
-    }
+    } // if
     if (order.compare(v[ub - 1], v[lb]) < 0) {
       ArrayUtils.swap(v, ub - 1, lb);
-    }
+    } // if
     if (order.compare(v[ub], v[ub - 1]) < 0) {
       ArrayUtils.swap(v, ub - 1, ub);
-    }
-  }
+    } // if
+  } // threeSort(T[], int, int)
 
+  /**
+   * Sorts four adjacent elements in an array.
+   * @param v
+   *    The array.
+   * @param one
+   *    The lower bound (inclusive).
+   * @param four
+   *    The upper bound (inclusive).
+   */
   private void fourSort(T[] v, int one, int four) {
     int two = one + 1;
     int three = four - 1;
@@ -130,5 +163,5 @@ public class GoldmanLeoSort<T> implements Sorter<T> {
     twoSort(v, one, three);
     twoSort(v, two, four);
     twoSort(v, two, three);
-  }
+  } // fourSort(T[], int, int)
 } // class Quicksorter
