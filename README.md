@@ -25,4 +25,4 @@ _GoldmanLeoSort_ is a Quicksort algorithm which uses two methods to achieve a qu
 Notes on using Copilot (or other AI)
 ------------------------------------
 
-_This section is optional_
+Did not use AI or Copilot.  
