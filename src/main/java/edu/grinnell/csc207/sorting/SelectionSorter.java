@@ -58,13 +58,31 @@ public class SelectionSorter<T> implements Sorter<T> {
   @Override
   public void sort(T[] values) {
     for (int i = 0; i < values.length; i++) {
-      int min = i;
-      for (int n = i; n < values.length; n++) {
-        if (order.compare(values[min], values[n]) > 0) {
-          min = n;
-        } // if
-      } // for
+      int min = indexOfSmallest(i, values.length, values);
       ArrayUtils.swap(values, i, min);
     } // for
   } // sort(T[])
+
+  /**
+   * Returns the index of the smallest value between 
+   * start and end of an array.
+   * 
+   * @param start
+   *    The start index (inclusive).
+   * @param end
+   *    The end index (exclusive).
+   * @param values
+   *    The array.
+   * @return
+   *    The index of the minimum value.
+   */
+  public int indexOfSmallest(int start, int end, T[] values) {
+    int min = start;
+    for (int n = start; n < end; n++) {
+      if (order.compare(values[min], values[n]) > 0) {
+        min = n;
+      } // if
+    } // for
+    return min;
+  } // indexOfSmallest(int, int, T[])
 } // class SelectionSorter
