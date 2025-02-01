@@ -1,6 +1,9 @@
 # mp-sorting-maven
 
 An exploration of sorting in Java.
+- Quicksort
+- Merge Sort
+- Custom Sorting Algorithm (GLSort)
 
 Acknowledgements
 
